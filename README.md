@@ -23,17 +23,16 @@ app/
 ├── main.py
 ├── config.py
 ├── models/                 # Domain entities (pure business logic)
-│   ├── paciente.py
-│   └── consulta.py
+│   ├── patient.py
+│   └── appointment.py
 ├── controller/             # Application layer (use cases)
-│   ├── paciente_controller.py
-│   └── consulta_controller.py
-├── adapter/                # External infrastructure
-│   └── db/
-│       ├── connection.py   # Database connection setup
-│       ├── base.py         # Generic CRUD operations
-│       ├── models.py       # SQLAlchemy ORM models
-│       └── repositories.py # Repository implementations
+│   ├── patientsBO.py
+│   ├── appointmentBO.py
+│   └── baseBO.py
+├── adapters/                # External infrastructure
+│   ├── postgresAdapter.py   # PostgreSQL adapter
+│   ├── dbBase.py            # Base database operations
+│   └── firestoreAdapter.py  # Firestore adapter
 ├── schemas/                # Pydantic schemas for request/response validation
 │   ├── paciente_schema.py
 │   └── consulta_schema.py
@@ -54,7 +53,7 @@ app/
 
 2.  **Create a virtual environment (recommended):
     ```bash
-    python -m venv venv
+    uv sync
     # On Windows
     .\venv\Scripts\activate
     # On macOS/Linux
@@ -63,7 +62,7 @@ app/
 
 3.  **Install dependencies:**
     ```bash
-    pip install -r requirements.txt
+    uv sync
     ```
 
 4.  **Database Configuration:**
@@ -80,7 +79,8 @@ app/
 
 5.  **Run the application:**
     ```bash
-    uvicorn app.main:app --reload
+    cp app
+    fastapi dev main.py
     ```
 
     The application will be accessible at `http://127.0.0.1:8000`.
