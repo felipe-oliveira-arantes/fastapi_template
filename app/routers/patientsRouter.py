@@ -17,4 +17,13 @@ def create_consulta(
     patient: PatientCreateSchema,
     db: Session = Depends(get_db)
 ):
+    """Creates a new patient in the database.
+
+    Args:
+        patient (PatientCreateSchema): The patient data to be created.
+        db (Session, optional): Database session. Defaults to Depends(get_db).
+
+    Returns:
+        PatientDates: The created patient's data with dates.
+    """
     return patients_bo.create_patient(db=db, patient=PatientDates(**patient.dict()))

@@ -17,4 +17,13 @@ def create_consulta(
     appointment: AppointmentCreateSchema,
     db: Session = Depends(get_db)
 ):
+    """Creates a new appointment in the database.
+
+    Args:
+        appointment (AppointmentCreateSchema): The appointment data to be created.
+        db (Session, optional): Database session. Defaults to Depends(get_db).
+
+    Returns:
+        AppointmentDates: The created appointment's data with dates.
+    """
     return appointment_bo.create_appointment(db=db, appointment=AppointmentDates(**appointment.dict()))
